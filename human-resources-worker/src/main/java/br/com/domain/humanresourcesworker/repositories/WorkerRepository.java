@@ -9,6 +9,6 @@ import br.com.domain.humanresourcesworker.model.Worker;
  *
  * @author Eduardo Isidoro Gonçalves.
  */
-public interface WorkerRepositories extends JpaRepository<Worker, Long> {
+public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
 }
