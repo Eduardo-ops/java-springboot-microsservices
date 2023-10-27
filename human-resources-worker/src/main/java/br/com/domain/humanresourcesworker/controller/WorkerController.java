@@ -2,7 +2,10 @@ package br.com.domain.humanresourcesworker.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,17 @@ import br.com.domain.humanresourcesworker.service.WorkerService;
 @RestController
 @RequestMapping(value = "/workers")
 public class WorkerController {
+	
+	/**
+	 * Atribute logger.
+	 */
+	private static Logger logger = LoggerFactory.getLogger(Worker.class);
+	
+	/**
+	 * Atribute environment.
+	 */
+	@Autowired
+	private Environment environment;
 
 	/**
 	 * Atribute workerService.
@@ -45,6 +59,9 @@ public class WorkerController {
 	 */
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Worker> findById(@PathVariable Long id) {
+		// Imprimi no log o número da porta quee está sendo executado o serviço.
+		logger.info("PORT: " + environment.getProperty("local.server.port"));
+		
 		return ResponseEntity.ok().body(this.workerService.findById(id));
 	}
 }
