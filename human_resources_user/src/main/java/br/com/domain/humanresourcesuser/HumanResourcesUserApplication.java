@@ -20,7 +20,7 @@ public class HumanResourcesUserApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.print("BCRYPT = " + passwordEncoder.encode("Minha senha em forma de encode."));
+		//System.out.print("BCRYPT = " + passwordEncoder.encode("Minha senha em forma de encode."));
 	}
 
 }
