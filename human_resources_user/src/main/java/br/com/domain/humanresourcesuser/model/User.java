@@ -62,7 +62,7 @@ public class User implements Serializable {
 	 * Default constructor.
 	 */
 	public User() {
-
+		
 	}
 
 	/**

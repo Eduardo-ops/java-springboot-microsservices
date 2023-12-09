@@ -38,7 +38,7 @@ public class Role implements Serializable {
 	 * Default constructor.
 	 */
 	public Role() {
-		super();
+		
 	}
 
 	/**
