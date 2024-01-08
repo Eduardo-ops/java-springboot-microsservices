@@ -41,8 +41,8 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient("hardcodemyappname123")
-		.secret(this.bCryptPasswordEncoder.encode("hardcodemyappsecret123"))
+		.withClient("myappname123")
+		.secret(this.bCryptPasswordEncoder.encode("myappsecret123"))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password")
 		.accessTokenValiditySeconds(86400);//24 horas de duração de token.

@@ -1,16 +1,22 @@
 package br.com.domain.humanresourcesoauth.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * Class reponsible for standardizing the User entity.
  * 
  * @author - Eduardo Isidoro Gonçalves.
  */
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
 	/**
 	 * Atribute serialVersionUID of serializable.
@@ -46,7 +52,7 @@ public class User implements Serializable {
 	 * Default constructor.
 	 */
 	public User() {
-		
+
 	}
 
 	/**
@@ -159,5 +165,40 @@ public class User implements Serializable {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// O retorno dependerá de uma lógica.
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// O retorno dependerá de uma lógica.
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// O retorno dependerá de uma lógica.
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// O retorno dependerá de uma lógica.
+		return true;
+	}
+
 }
