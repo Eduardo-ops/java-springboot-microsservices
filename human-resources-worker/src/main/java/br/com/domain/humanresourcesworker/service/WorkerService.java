@@ -3,10 +3,7 @@ package br.com.domain.humanresourcesworker.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import br.com.domain.humanresourcesworker.model.Worker;
@@ -19,16 +16,6 @@ import br.com.domain.humanresourcesworker.repositories.WorkerRepository;
  */
 @Service
 public class WorkerService {
-	
-	/**
-	 * Atribute logger.
-	 */
-	private static Logger logger = LoggerFactory.getLogger(Worker.class);
-	
-	@Value("${test.config}")
-	private String testConfig;
-	
-	//private final static String TESTCONFIG = "${test.config}";
 
 	/**
 	 * Atribute workerRepository.
@@ -43,10 +30,6 @@ public class WorkerService {
 	 */
 	public List<Worker> findAll() {
 		return this.workerRepository.findAll();
-	}
-	
-	public void getConfigurations() {
-		logger.info("CONFIG: " + testConfig);
 	}
 
 	/**

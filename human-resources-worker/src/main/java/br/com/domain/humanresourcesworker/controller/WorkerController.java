@@ -52,12 +52,6 @@ public class WorkerController {
 	public ResponseEntity<List<Worker>> findAll() {
 		return ResponseEntity.ok().body(this.workerService.findAll());
 	}
-	
-	@GetMapping(value = "/configurations")
-	public ResponseEntity<Void> getConfigurations() {
-		this.workerService.getConfigurations();
-		return ResponseEntity.noContent().build();
-	}
 
 	/**
 	 * Method responsible for fetching a specific worker.
