@@ -30,7 +30,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	private static final String[] OPERATOR = { "/human-resources-worker/**" };
 
-	private static final String[] ADMIN = { "/human-resources-payroll/**", "/human-resources-user/**" };
+	private static final String[] ADMIN = { "/human-resources-payroll/**", "/human-resources-user/**", "/actuator/**",
+			"/human-resources-worker/actuator/**", "/human-resources-oauth/actuator/**" };
 
 	@Autowired
 	private JwtTokenStore jwtTokenStore;
@@ -42,29 +43,27 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET, OPERATOR).hasAnyRole("OPERATOR", "ADMIN")
-		.antMatchers(ADMIN).hasRole("ADMIN")
-		.anyRequest().authenticated();
-		
+		http.authorizeRequests().antMatchers(PUBLIC).permitAll().antMatchers(HttpMethod.GET, OPERATOR)
+				.hasAnyRole("OPERATOR", "ADMIN").antMatchers(ADMIN).hasRole("ADMIN").anyRequest().authenticated();
+
 		http.cors().configurationSource(this.corsConfigurationSource());
 	}
-	
+
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
 		corsConfiguration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
-		
+
 		UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
 		urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 		return urlBasedCorsConfigurationSource;
 	}
-	
+
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> filterRegistrationBean = new FilterRegistrationBean<>(new CorsFilter(this.corsConfigurationSource()));
+		FilterRegistrationBean<CorsFilter> filterRegistrationBean = new FilterRegistrationBean<>(
+				new CorsFilter(this.corsConfigurationSource()));
 		filterRegistrationBean.setOrder(HIGHEST_PRECEDENCE);
 		return filterRegistrationBean;
 	}
