@@ -1,0 +1,18 @@
+CRIAR REDE NET
+---------------------------------------------------------------------------------------------------------------------
+docker network create human-resources-net
+
+
+BAIXAR IMAGEM DOCKER POSTGRES
+---------------------------------------------------------------------------------------------------------------------
+- docker pull postgres:1q2-alpine
+
+
+CRIAR CONTAINER DOCKER PARA SERVIDOR POSTGRES
+---------------------------------------------------------------------------------------------------------------------
+- docker run -p 5432:5432 --name db-human-resources-worker-pg12 --network human-resources-net -e POSTGRES_PASSWORD=1234567 -e POSTGRES_DB=db_human_resources_worker postgres:12-alpine
+
+
+LISTAR TODOS OS CONTAINER CRIADOS
+---------------------------------------------------------------------------------------------------------------------
+docker ps -a
