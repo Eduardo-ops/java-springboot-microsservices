@@ -27,7 +27,7 @@ LEVANTAR UM CONTAINER COM UMA IMAGEM
 ---------------------------------------------------------------------------------------------------------------------
 - docker run -p 8888:8888 --name human-resources-configuration-server --network human-resources-net -e GITHUB_USER=Eduardo-ops -e GITHUB_PASS= 
 
-docker run -p 8888:8888 --name hr-config-server --network human-resources-net -e GITHUB_USER=Eduardo-ops -e GITHUB_PASS=3du@rd0s hr-config-server:v1
+docker run -p 8888:8888 --name hr-config-server --network human-resources-net -e GITHUB_USER=Eduardo-ops -e GITHUB_PASS= hr-config-server:v1
 
 
 docker run -p 8888:8888 --name human-resources-configuration-server --network human-resources-net -e GITHUB_USER=Eduardo-ops -e GITHUB_PASS= human-resources-configuration-server:v1
