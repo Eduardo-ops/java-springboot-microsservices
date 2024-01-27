@@ -1,36 +1,33 @@
 CRIAR REDE NET
----------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 docker network create human-resources-net
 
 
 BAIXAR IMAGEM DOCKER POSTGRES
----------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 - docker pull postgres:1q2-alpine
 
 
 CRIAR CONTAINER DOCKER PARA SERVIDOR POSTGRES
----------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 - docker run -p 5432:5432 --name db-human-resources-worker-pg12 --network human-resources-net -e POSTGRES_PASSWORD=1234567 -e POSTGRES_DB=db_human_resources_worker postgres:12-alpine
 
 
 LISTAR TODOS OS CONTAINER CRIADOS
----------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 docker ps -a
 
 
 CRIAR IMAGEM DOCKER SPRINGBOOT
----------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 - docker build -t nome_projeto:v1 .
 
 
 LEVANTAR UM CONTAINER COM UMA IMAGEM
----------------------------------------------------------------------------------------------------------------------
-- docker run -p 8888:8888 --name human-resources-configuration-server --network human-resources-net -e GITHUB_USER=Eduardo-ops -e GITHUB_PASS= 
-
-docker run -p 8888:8888 --name hr-config-server --network human-resources-net -e GITHUB_USER=Eduardo-ops -e GITHUB_PASS= hr-config-server:v1
-
-
-docker run -p 8888:8888 --name human-resources-configuration-server --network human-resources-net -e GITHUB_USER=Eduardo-ops -e GITHUB_PASS= human-resources-configuration-server:v1
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+- docker run -p 8888:8888 --name nome-imagem-docker --network rede docker -e GITHUB_USER= -e GITHUB_PASS= nome-container-docker:v1(Senhas github de microsserviço que acessam repositórios de configuração);
+- docker run -p 8888:8888 --name nome-imagem-docker --network rede docker container-docker:v1(Microsserviço sem acesso a github);
+- docker run -P --network nome_projeto nome_container_docker(Microsserviço sem especificação de porta);
 
 
 
